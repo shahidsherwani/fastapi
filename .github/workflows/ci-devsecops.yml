@@ -36,15 +36,21 @@ jobs:
       # --- SonarCloud Quality Scan ---
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2.3
+        continue-on-error: true  # Don't block other scans if SonarCloud fails
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       # --- Bandit SAST Scan ---
       - name: Run Bandit Security Scan
-        uses: PyCQA/bandit-action@v1
+        run: |
+          pip install bandit[toml]
+          bandit -r devsecops-demo -f json -o bandit-report.json || true
+          bandit -r devsecops-demo -f screen
         continue-on-error: true
+
+      - name: Upload Bandit results
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          path: "devsecops-demo"
-          level: high
-          confidence: high
-          exit_zero: true
+          name: bandit-security-report
+          path: bandit-report.json
