@@ -1,3 +1,4 @@
+SUCCESSFUL_RESPONSE = "SUCCESSFUL_RESPONSE"
 from enum import Enum
 from typing import (
     Any,
@@ -49,7 +50,7 @@ from fastapi.constants import SUCCESSFUL_RESPONSE
 @app.get("/health")
 def health_check():
     return {"message": SUCCESSFUL_RESPONSE}
-    
+
 class FastAPI(Starlette):
     """
     `FastAPI` app class, the main entrypoint to use FastAPI.
