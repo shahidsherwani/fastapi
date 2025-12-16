@@ -45,10 +45,11 @@ from starlette.responses import HTMLResponse, JSONResponse, Response
 from starlette.routing import BaseRoute
 from starlette.types import ASGIApp, ExceptionHandler, Lifespan, Receive, Scope, Send
 from typing_extensions import Annotated, deprecated
-
-AppType = TypeVar("AppType", bound="FastAPI")
-
-
+from fastapi.constants import SUCCESSFUL_RESPONSE
+@app.get("/health")
+def health_check():
+    return {"message": SUCCESSFUL_RESPONSE}
+    
 class FastAPI(Starlette):
     """
     `FastAPI` app class, the main entrypoint to use FastAPI.
@@ -1149,7 +1150,7 @@ class FastAPI(Starlette):
         dependencies: Optional[Sequence[Depends]] = None,
         summary: Optional[str] = None,
         description: Optional[str] = None,
-        response_description: str = "Successful Response",
+        response_description: str = SUCCESSFUL_RESPONSE,
         responses: Optional[Dict[Union[int, str], Dict[str, Any]]] = None,
         deprecated: Optional[bool] = None,
         methods: Optional[List[str]] = None,
@@ -1207,7 +1208,7 @@ class FastAPI(Starlette):
         dependencies: Optional[Sequence[Depends]] = None,
         summary: Optional[str] = None,
         description: Optional[str] = None,
-        response_description: str = "Successful Response",
+        response_description: str = SUCCESSFUL_RESPONSE,
         responses: Optional[Dict[Union[int, str], Dict[str, Any]]] = None,
         deprecated: Optional[bool] = None,
         methods: Optional[List[str]] = None,
@@ -1667,7 +1668,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -2040,7 +2041,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -2418,7 +2419,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -2796,7 +2797,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -3169,7 +3170,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -3542,7 +3543,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -3915,7 +3916,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
@@ -4293,7 +4294,7 @@ class FastAPI(Starlette):
                 It will be added to the generated OpenAPI (e.g. visible at `/docs`).
                 """
             ),
-        ] = "Successful Response",
+        ] = SUCCESSFUL_RESPONSE,
         responses: Annotated[
             Optional[Dict[Union[int, str], Dict[str, Any]]],
             Doc(
